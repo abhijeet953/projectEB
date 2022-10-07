@@ -1,0 +1,46 @@
+
+.LogIn {
+  margin: 100px;
+  text-align: center;
+}
+.pic {
+  height: 45px;
+  margin: 0px;
+  padding: 0px;
+}
+.cont-body1 {
+  padding: 20px 0;
+  font-size: 2.9rem;
+  font-weight: bold;
+}
+.contbody2{
+
+  padding: 20px;
+  line-height: 0px;
+}
+.text-middle{
+  /* width: 500px; */
+  background-color: rgb(142, 153, 163);
+}
+.loginTitle{
+  margin: 10px;
+  padding: 10px;
+  font-size: larger;
+  font-weight: bolder;
+}
+.loginForm{
+  padding: 2px;
+}
+.loginInput{
+  margin: 10px;
+}
+.inputType{
+  font-size:large;
+  font-weight:400px;
+}
+.btnReg{
+  margin: 20px;
+}
+#logInDiv{
+  margin: 20px;
+}

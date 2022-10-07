@@ -1,0 +1,10 @@
+.posts{
+    display: flex;
+    flex: 9;
+    margin: 10px;
+}
+.postsContent{
+    /* background-color: aquamarine; */
+    margin: 50px;
+    padding: 20px;
+}

@@ -1,0 +1,13 @@
+#logo{
+    height: 8px;
+    color: aliceblue;
+  }
+.profileIcon{
+  /* font-size: inherit; */
+  /* font-weight:100; */
+  font-size:14px;
+}
+.profileText{
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
