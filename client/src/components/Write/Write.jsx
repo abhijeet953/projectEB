@@ -32,15 +32,18 @@ function Write() {
     }
     try {
       const res = await axios.post("http://localhost:5000/api/posts", newPost);
-      window.location.replace("/Userpage");
+      // window.location.replace("/Userpage");
+      navigate("/Userpage");
     } catch (err) {}
   };
 
   useEffect(() => {
-    if (localStorage.getItem("user") === null) {
+    if (user == null) {
       navigate("/LogIn");
     }
-    console.log("user is" + localStorage.getItem("user"));
+    if (!localStorage.getItem("user")) {
+      navigate("/LogIn");
+    }
   }, []);
   return (
     <div className="write">

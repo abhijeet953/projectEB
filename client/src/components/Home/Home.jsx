@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext ,useEffect} from "react";
 import Header from "../Header/Header";
 import "./Home.css";
 import Button from "react-bootstrap/Button";
@@ -7,8 +7,30 @@ import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 import pic from "../assets/pic.png";
+import { Context } from "../context/Context";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
+  const { user } = useContext(Context);
+  const navigate = useNavigate();
+  console.log ( "user is " + user);
+  useEffect(() => {
+    if(user === "undefined" || user === null || !localStorage.getItem('user'))
+    {
+       navigate('/');
+    }
+    else if(user.data === "undefined") {
+      navigate("/");
+    }
+    else if(user) navigate('/Userpage');
+    // if (user) {
+    //   navigate("/Userpage");
+    // }
+  }, []);
+  
+
+  // localStorage.removeItem('user');
+
   return (
     <div className="Home">
       <div className="header">

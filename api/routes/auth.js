@@ -3,6 +3,7 @@ const { model } = require("mongoose");
 const User = require("../models/User.jsx");
 const bcrypt = require("bcrypt");
 //Register
+
 router.post("/register", async (req, res) => {
   try {
     const salt = await bcrypt.genSalt(10);

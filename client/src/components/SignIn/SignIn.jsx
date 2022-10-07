@@ -32,7 +32,7 @@ function SignIn() {
     //   id: localStorage.getItem("userId"),
     //   firstName: localStorage.getItem("userfirstName"),
     //   lastName: localStorage.getItem("userlastName"),
-    // }; 
+    // };
     navigate("/Userpage");
   }
   console.log("google " + process.env.REACT_APP_GOOGLE_CLIENT_ID);
@@ -42,15 +42,14 @@ function SignIn() {
     if (localStorage.getItem("userId")) {
       navigate("/Userpage");
     }
-      google.accounts.id.initialize({
-      client_id:
-      process.env.REACT_APP_GOOGLE_CLIENT_ID,
+    google.accounts.id.initialize({
+      client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
       callback: handleCallbackResponse,
     });
 
     google.accounts.id.renderButton(document.getElementById("signInDiv"), {
       theme: "outline",
-      size: "medium"
+      size: "medium",
     });
   }, []);
 
@@ -76,6 +75,7 @@ function SignIn() {
       setError(true);
     }
   };
+
   return (
     <div className="SignIn">
       <Row className="justify-content-md-center">
@@ -90,7 +90,11 @@ function SignIn() {
           </Col>
         </Row>
         <span className="registerTitle">Register</span>
-        <form className="registerForm" onSubmit={handleSubmit} autoComplete={false}>
+        <form
+          className="registerForm"
+          onSubmit={handleSubmit}
+          autoComplete={false}
+        >
           <Row className="justify-content-md-center ">
             <Col xs lg="2" className="inputType">
               Username:
@@ -141,35 +145,29 @@ function SignIn() {
             </Row>
           </Row>
         </form>
-        
       </Row>
       <Row className="justify-content-md-center">
-        
-          <Col xs lg="6">
+        <Col xs lg="6">
           <Row className="justify-content-md-center">
-          <Col xs lg="3">
-               <hr/>
-              </Col>
-              <Col md="auto">
-               Or Connect using
-              </Col>
-              <Col xs lg="3">
-               <hr/>
-              </Col>
-            
+            <Col xs lg="3">
+              <hr />
+            </Col>
+            <Col md="auto">Or Connect using</Col>
+            <Col xs lg="3">
+              <hr />
+            </Col>
           </Row>
-            <Button id="signInDiv" className="btn-light btn-sm">
-              {" "}
-              Start Exploring{" "}
-            </Button>
-            {error && (
-              
-              <span style={{ color: "red", marginTop: "10px" }}>
-                Something went wrong!
-              </span>
-            ) }
-          </Col>
-        </Row>
+          <Button id="signInDiv" className="btn-light btn-sm">
+            {" "}
+            Start Exploring{" "}
+          </Button>
+          {error && (
+            <span style={{ color: "red", marginTop: "10px" }}>
+              Something went wrong!
+            </span>
+          )}
+        </Col>
+      </Row>
     </div>
   );
 }

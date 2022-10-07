@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "./assets/Header/Header";
 import Posts from "./assets/Posts/Posts";
@@ -13,9 +13,16 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import logoUrl from "../assets/logo.svg";
+import { Context } from "../context/Context";
+
+import UIAvatar from "react-ui-avatars";
+var SignOut = false;
+
 function Userpage() {
   const navigate = useNavigate();
+  const { user } = useContext(Context);
   function handleSignOut(event) {
+    SignOut = true;
     localStorage.clear();
     navigate("/");
   }
@@ -26,27 +33,34 @@ function Userpage() {
       navigate("/Write");
     } else navigate("/LogIn");
   }
-
-  var user = {
-    email: localStorage.getItem("userEmail"),
-    id: localStorage.getItem("userId"),
-    firstName: localStorage.getItem("userfirstName"),
-    lastName: localStorage.getItem("userlastName"),
-  };
+  // var user = {
+  //   email: localStorage.getItem("userEmail"),
+  //   id: localStorage.getItem("userId"),
+  //   firstName: localStorage.getItem("userfirstName"),
+  //   lastName: localStorage.getItem("userlastName"),
+  // };
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    if (!localStorage.getItem("user")) {
-      navigate("/LogIn");
-    }
-
+    // if (localStorage.getItem("user") === null) {
+    //   navigate("/LogIn");
+    // }
     const fetchPosts = async () => {
       const res = await axios.get("http://localhost:5000/api/posts");
       setPosts(res.data);
       console.log(res);
     };
     fetchPosts();
+    if (user === null) {
+      navigate("/LogIn");
+    }
   }, []);
+  useEffect(() => {
+    SignOut = false;
+    // localStorage.clear();
+    SignOut = false;
+    // navigate('/');
+  }, [SignOut]);
   return (
     <div className="userPage">
       <Navbar
@@ -93,7 +107,18 @@ function Userpage() {
                 }
                 id="collasible-nav-dropdown"
               >
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                {user && (
+                  <NavDropdown.Item>
+                    <UIAvatar
+                      className="avatar"
+                      background="random"
+                      size="30"
+                      name={user.username}
+                      rounded={true}
+                    />{" "}
+                    {user.username}{" "}
+                  </NavDropdown.Item>
+                )}
                 <NavDropdown.Divider />
                 <NavDropdown.Item className="navBtn">
                   <Button
@@ -108,15 +133,17 @@ function Userpage() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+
       {/* <Container className="postData"> */}
-          <Posts postsArray={posts} />
+      <Posts postsArray={posts} />
+
       {/* </Container> */}
-      {/* <Button onClick={(e) => handleSignOut(e)} className="btn-light">
+      <Button onClick={(e) => handleSignOut(e)} className="btn-light">
         Log Out
       </Button>
       <Button onClick={(e) => handleWrite(e)} className="btn-light">
         Write
-      </Button> */}
+      </Button>
     </div>
   );
 }
